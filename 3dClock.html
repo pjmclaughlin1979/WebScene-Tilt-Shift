@@ -38,7 +38,7 @@
           map: map,
           container: "viewDiv",
 
-          // position in Brest, France
+          // position in Belfast, N Ireland
           camera: {
             // autocasts as esri/Camera
             position: {
@@ -87,7 +87,7 @@
         var clock = new Clock({
           el: "clock",
           skin:
-            "https://developers.arcgis.com/javascript/latest/sample-code/scene-environment/live/clock.svg",
+            "clock.svg",
           time: view.environment.lighting.date.getTime()
         });
         view.ui.add("clock", "bottom-right");
@@ -141,7 +141,7 @@
   <body>
     <div id="viewDiv" class="esri-widget">
       <div id="timeInfo">
-        <span id="timeLocation">Brest, France</span> <br />
+        <span id="timeLocation">Belfast</span> <br />
         <span id="timeField"></span>
       </div>
       <div id="clock"></div>
