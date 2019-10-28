@@ -28,8 +28,8 @@ require([
         map: scene,
         qualityProfile: "low",
         environment: {
-            starsEnabled: false,
-            atmosphereEnabled: false,
+            starsEnabled: true,
+            atmosphereEnabled: true,
             lighting: {
                 cameraTrackingEnabled: false,
                 directShadowsEnabled: false,
