@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -5,12 +6,7 @@
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
-    <!--
-  ArcGIS API for JavaScript, https://js.arcgis.com
-  For more information about the scene-environment sample, read the original sample description at developers.arcgis.com.
-  https://developers.arcgis.com/javascript/latest/sample-code/scene-environment/index.html
-  -->
-<title>Set realistic environment settings in a SceneView - 4.13</title>
+    <title>Set realistic environment settings in a SceneView - 4.13</title>
 
     <link
       rel="stylesheet"
@@ -32,7 +28,7 @@
           layers: [
             new SceneLayer({
               portalItem: {
-                id: "042b9afbec3544709eb5d10668c71313"
+                id: "b343e14455fe45b98a2c20ebbceec0b0"
               }
             })
           ]
@@ -42,21 +38,21 @@
           map: map,
           container: "viewDiv",
 
-          // position in Belfast, Ireland
+          // position in Brest, France
           camera: {
             // autocasts as esri/Camera
             position: {
               // autocasts as esri/geometry/Point
-              x: -5.928330949523294,
-              y: 54.598330949523294,
-              z: 138, 
+              x: -500180.363,
+              y: 6170505.212,
+              z: 27.623,
               spatialReference: {
                 // autocasts as esri/geometry/SpatialReference
-                wkid: 4326
+                wkid: 102100
               }
             },
-            heading: 350,
-            tilt: 74,
+            heading: 204.85,
+            tilt: 104.94,
             fov: 80
           },
 
@@ -145,7 +141,7 @@
   <body>
     <div id="viewDiv" class="esri-widget">
       <div id="timeInfo">
-        <span id="timeLocation">Belfast, Northern Ireland</span> <br />
+        <span id="timeLocation">Brest, France</span> <br />
         <span id="timeField"></span>
       </div>
       <div id="clock"></div>
