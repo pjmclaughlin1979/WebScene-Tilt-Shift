@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <!--
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the scene-environment sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/latest/sample-code/scene-environment/index.html
+  -->
+<title>Set realistic environment settings in a SceneView - 4.13</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.13/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.13/"></script>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/SceneLayer",
+        "esri/widgets/Home",
+        "https://developers.arcgis.com/javascript/latest/sample-code/scene-environment/live/Clock.js"
+      ], function(Map, SceneView, SceneLayer, Home, Clock) {
+        var map = new Map({
+          basemap: "satellite",
+          ground: "world-elevation",
+          layers: [
+            new SceneLayer({
+              portalItem: {
+                id: "042b9afbec3544709eb5d10668c71313"
+              }
+            })
+          ]
+        });
+
+        var view = new SceneView({
+          map: map,
+          container: "viewDiv",
+
+          // position in Belfast, Ireland
+          camera: {
+            // autocasts as esri/Camera
+            position: {
+              // autocasts as esri/geometry/Point
+              x: -5.928330949523294,
+              y: 54.598330949523294,
+              z: 138, 
+              spatialReference: {
+                // autocasts as esri/geometry/SpatialReference
+                wkid: 4326
+              }
+            },
+            heading: 350,
+            tilt: 74,
+            fov: 80
+          },
+
+          environment: {
+            atmosphere: {
+              // creates a realistic view of the atmosphere
+              quality: "high"
+            },
+            lighting: {
+              date: new Date(),
+              directShadowsEnabled: true,
+              // don't update the view time when user pans.
+              // The clock widget drives the time
+              cameraTrackingEnabled: false
+            }
+          },
+
+          ui: {
+            components: ["attribution"]
+          }
+        });
+
+        // configure the UI
+
+        var homeWidget = new Home({
+          view: view
+        });
+        view.ui.add(homeWidget, "top-right");
+
+        view.ui.add("timeInfo", "top-left");
+
+        var clock = new Clock({
+          el: "clock",
+          skin:
+            "https://developers.arcgis.com/javascript/latest/sample-code/scene-environment/live/clock.svg",
+          time: view.environment.lighting.date.getTime()
+        });
+        view.ui.add("clock", "bottom-right");
+
+        // update the time of the view when the clock time changes
+        var timeField = document.getElementById("timeField");
+        var updateTimefield = function() {
+          timeField.innerHTML = view.environment.lighting.date.toLocaleString();
+        };
+        updateTimefield();
+        clock.on("time-change", function(time) {
+          view.environment.lighting.date = time;
+          updateTimefield();
+        });
+      });
+    </script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #timeInfo {
+        color: white;
+      }
+
+      #timeField {
+        font-size: 20px;
+      }
+
+      #timeLocation {
+        font-size: 30px;
+      }
+
+      #clock {
+        width: 220px;
+        height: 220px;
+      }
+
+      .esri-ui-corner .esri-component {
+        box-shadow: inherit;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="viewDiv" class="esri-widget">
+      <div id="timeInfo">
+        <span id="timeLocation">Belfast, Northern Ireland</span> <br />
+        <span id="timeField"></span>
+      </div>
+      <div id="clock"></div>
+    </div>
+  </body>
+</html>
