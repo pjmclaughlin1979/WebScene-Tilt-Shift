@@ -117,7 +117,7 @@
         labels: ['Street trees', 'Building trees'],
         datasets: [{
           backgroundColor: ["rgb(158, 132, 173)","rgb(133, 168, 72)"],
-          data: [49858, 0]
+          data: [45500, 0]
         }]
       };
 
@@ -146,7 +146,7 @@
 
       view.when(function () {
         view.map.layers.filter(function (layer) {
-          if (layer.title === "Buildings Manhattan") {
+          if (layer.title === "BelfastSLP") {
             sceneLayer = layer;
 
             view.whenLayerView(sceneLayer)
